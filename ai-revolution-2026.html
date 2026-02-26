@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="6 weeks that changed software forever. A presentation covering AI coding stats, $680B+ in Mag 7 capex, and the events of Feb 2026.">
+    <meta property="og:title" content="The AI Revolution — February 2026">
+    <meta property="og:description" content="6 weeks that changed software forever. $680B+ Mag 7 AI Capex, 90% AI-written code at Anthropic, $285B SaaS wipeout, and more.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The AI Revolution — February 2026">
+    <meta name="twitter:description" content="6 weeks that changed software forever. A personal perspective by Ajith Ganesan.">
+    <meta name="author" content="Ajith Ganesan">
+    <title>The AI Revolution — February 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f9fafb 100%);
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #374151;
+        }
+
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .slide-indicator {
+            color: #6b7280;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .fullscreen-btn {
+            padding: 0.5rem 1rem;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .fullscreen-btn:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        /* Slide Area */
+        .slide-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-content {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            padding: 2.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(124,58,237,0.2) transparent;
+        }
+
+        .slide-content::-webkit-scrollbar { width: 6px; }
+        .slide-content::-webkit-scrollbar-track { background: transparent; }
+        .slide-content::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.2); border-radius: 3px; }
+
+        .slide-content.active {
+            display: flex;
+            animation: slideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(124,58,237,0.2) transparent;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 5px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.2); border-radius: 3px; }
+
+        .sidebar h3 {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .sidebar-section {
+            margin-top: 1rem;
+        }
+
+        .sidebar-section h3 {
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+        }
+
+        .slide-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .slide-btn {
+            padding: 0.65rem 0.85rem;
+            text-align: left;
+            background: transparent;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+
+        .slide-btn:hover {
+            background: rgba(124, 58, 237, 0.08);
+            color: #7c3aed;
+        }
+
+        .slide-btn.active {
+            background: rgba(124, 58, 237, 0.12);
+            color: #7c3aed;
+            font-weight: 600;
+            border-left: 3px solid #7c3aed;
+        }
+
+        /* Nav Footer */
+        .nav-footer {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(229, 231, 235, 0.5);
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            font-family: inherit;
+        }
+
+        .nav-btn.prev {
+            background: #f3f4f6;
+            color: #4b5563;
+            border: none;
+        }
+
+        .nav-btn.prev:hover:not(:disabled) { background: #e5e7eb; }
+
+        .nav-btn.next {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .nav-btn.next:hover:not(:disabled) { background: #6d28d9; }
+
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .slide-dots {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 4px;
+            background: #7c3aed;
+        }
+
+        .dot:hover:not(.active) { background: #9ca3af; }
+
+        /* ============================
+           SLIDE-SPECIFIC STYLES
+           ============================ */
+
+        /* Title Slide */
+        .title-slide {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100%;
+        }
+
+        .title-slide h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a855f7, #7c3aed, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.3rem;
+            color: #6b7280;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .title-slide .byline {
+            font-size: 0.95rem;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        .title-slide .stat-ribbon {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-ribbon .stat-pill {
+            background: #f5f3ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 2rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
+            color: #6d28d9;
+            font-weight: 500;
+        }
+
+        .stat-pill strong {
+            color: #7c3aed;
+        }
+
+        /* Quote Card */
+        .quote-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .quote-card:hover {
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.08);
+        }
+
+        .quote-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .quote-name {
+            font-weight: 700;
+            color: #111827;
+            font-size: 0.95rem;
+        }
+
+        .quote-role {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.15rem;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #374151;
+            font-style: italic;
+            padding-left: 1rem;
+            border-left: 3px solid rgba(124,58,237,0.4);
+            margin-bottom: 0.75rem;
+        }
+
+        .quote-source {
+            font-size: 0.7rem;
+            color: #4b5563;
+        }
+
+        .quote-source a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+
+        .quote-source a:hover { text-decoration: underline; }
+
+        /* Section Header inside slides */
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-subtitle {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .group-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #7c3aed;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(124,58,237,0.2);
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .stat-card:hover {
+            border-color: rgba(124,58,237,0.3);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .stat-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .stat-info { flex: 1; }
+
+        .stat-company {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-detail {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .stat-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .stat-bar {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #7c3aed, #a855f7);
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+
+        .stat-pct {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #7c3aed;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .stat-source {
+            font-size: 0.65rem;
+            color: #4b5563;
+            margin-top: 0.3rem;
+        }
+
+        .stat-source a { color: #7c3aed; text-decoration: none; }
+
+        /* Money Cards */
+        .money-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .money-card:hover {
+            border-color: rgba(234,179,8,0.4);
+            box-shadow: 0 4px 20px rgba(234,179,8,0.1);
+            transform: translateX(4px);
+        }
+
+        .money-amount {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #b45309;
+            min-width: 100px;
+        }
+
+        .money-info { flex: 1; }
+
+        .money-company {
+            font-weight: 700;
+            color: #111827;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .money-what {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .money-source {
+            font-size: 0.65rem;
+            color: #4b5563;
+            margin-top: 0.3rem;
+        }
+
+        .money-source a { color: #7c3aed; text-decoration: none; }
+
+        .money-total {
+            background: linear-gradient(135deg, #fef3c7, #ede9fe);
+            border: 1px solid rgba(234,179,8,0.25);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .money-total .big-num {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #b45309, #92400e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .money-total .context {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 50px; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #7c3aed, rgba(124,58,237,0.1));
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 1.75rem;
+            padding-left: 0;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #7c3aed;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px rgba(124,58,237,0.15);
+            z-index: 2;
+            transform: translateX(-50%);
+        }
+
+        .tl-item.major::before {
+            width: 18px;
+            height: 18px;
+            left: -29px;
+            top: 2px;
+            background: #ef4444;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px rgba(239,68,68,0.2), 0 0 10px rgba(239,68,68,0.25);
+            transform: translateX(-50%);
+        }
+
+        .tl-date {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #7c3aed;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.3rem;
+        }
+
+        .tl-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.3rem;
+        }
+
+        .tl-desc {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .tl-source {
+            font-size: 0.65rem;
+            color: #4b5563;
+            margin-top: 0.25rem;
+        }
+
+        .tl-source a { color: #7c3aed; text-decoration: none; }
+
+        .tl-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 1rem;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tl-tag.war { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .tl-tag.market { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
+        .tl-tag.launch { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .tl-tag.hack { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+        .tl-tag.culture { background: #faf5ff; color: #7c3aed; border: 1px solid #e9d5ff; }
+
+        /* GitHub Journey */
+        .github-grid {
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .gh-year-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .gh-year-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .gh-bar {
+            height: 20px;
+            border-radius: 4px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+
+        .gh-bar.empty { background: #f3f4f6; min-width: 4px; }
+        .gh-bar.some { background: rgba(34,197,94,0.3); }
+        .gh-bar.active { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .gh-bar.explosion { background: linear-gradient(90deg, #7c3aed, #a855f7, #22c55e); }
+
+        .gh-count {
+            font-size: 0.7rem;
+            color: #6b7280;
+            margin-left: 0.5rem;
+        }
+
+        /* Tweet Card */
+        .tweet-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .tweet-card:hover {
+            border-color: rgba(29,155,240,0.4);
+            box-shadow: 0 4px 12px rgba(29,155,240,0.08);
+        }
+
+        .tweet-card .tweet-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tweet-card .tweet-author {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #111827;
+        }
+
+        .tweet-card .tweet-handle {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .tweet-card .tweet-text {
+            font-size: 0.85rem;
+            color: #374151;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .tweet-card .tweet-date {
+            font-size: 0.65rem;
+            color: #64748b;
+        }
+
+        .tweet-card a {
+            color: #1d9bf0;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        /* Video Embed */
+        .video-embed {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin: 0.5rem 0;
+            background: #000;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .video-embed iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            display: block;
+        }
+
+        .video-embed.short-embed {
+            max-width: 200px;
+        }
+
+        .video-embed.short-embed iframe {
+            aspect-ratio: 9/16;
+            max-height: 360px;
+        }
+
+        .video-label {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.3rem;
+            text-align: center;
+        }
+
+        /* Closing Slide */
+        .closing-slide {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100%;
+        }
+
+        .closing-slide h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #111827;
+            line-height: 1.3;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .closing-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .closing-stat {
+            text-align: center;
+        }
+
+        .closing-stat .num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #7c3aed;
+        }
+
+        .closing-stat .label {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .watermark {
+            font-size: 0.7rem;
+            color: #475569;
+            margin-top: 2rem;
+        }
+
+        /* Inline video row */
+        .video-row {
+            display: flex;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .video-row > div {
+            flex: 1;
+            min-width: 140px;
+            max-width: 280px;
+        }
+
+        .video-row > div:first-child {
+            flex: 1;
+            max-width: 280px;
+        }
+
+        /* Highlight callout */
+        .callout {
+            background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+            border: 1px solid rgba(124,58,237,0.2);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .callout .callout-big {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #6d28d9;
+        }
+
+        .callout .callout-sub {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.35rem;
+        }
+
+        /* Avatar colors */
+        .av-green { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        .av-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .av-purple { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; }
+        .av-orange { background: linear-gradient(135deg, #f97316, #ea580c); color: white; }
+        .av-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+        .av-yellow { background: linear-gradient(135deg, #eab308, #ca8a04); color: white; }
+        .av-cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+        .av-pink { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
+        .av-teal { background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; }
+        .av-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+        .av-slate { background: linear-gradient(135deg, #64748b, #475569); color: white; }
+
+        /* Logo colors for stat cards */
+        .logo-google { background: linear-gradient(135deg, #4285f4, #34a853); color: white; }
+        .logo-ms { background: linear-gradient(135deg, #00a4ef, #7fba00); color: white; }
+        .logo-amazon { background: linear-gradient(135deg, #ff9900, #232f3e); color: white; }
+        .logo-meta { background: linear-gradient(135deg, #0668E1, #1877F2); color: white; }
+        .logo-anthropic { background: linear-gradient(135deg, #d4a574, #c8956c); color: white; }
+        .logo-github { background: linear-gradient(135deg, #333, #24292e); color: white; }
+        .logo-nvidia { background: linear-gradient(135deg, #76b900, #5a8c00); color: white; }
+        .logo-apple { background: linear-gradient(135deg, #555, #333); color: white; }
+        .logo-tesla { background: linear-gradient(135deg, #cc0000, #990000); color: white; }
+
+        /* Personal Examples Slide */
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .example-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .example-card:hover {
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.1);
+        }
+
+        .example-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .example-card .example-caption {
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        .example-card .example-caption strong {
+            color: #111827;
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation-container { height: auto; overflow: visible; }
+            .header, .nav-footer, .sidebar { display: none; }
+            .main-content { padding: 0; display: block; overflow: visible; }
+            .slide-area { overflow: visible; }
+            .slide-container {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                height: auto;
+                overflow: visible;
+                position: static;
+            }
+            .slide-content {
+                display: flex !important;
+                position: static;
+                padding: 2rem 1rem;
+                page-break-after: always;
+                border-bottom: 1px solid #e5e7eb;
+                animation: none;
+            }
+            .slide-content:last-child { border-bottom: none; }
+            .video-embed { display: none; }
+            .video-row { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">AI</div>
+                <span class="logo-text">The AI Revolution — Feb 2026</span>
+            </div>
+            <div class="header-controls">
+                <span class="slide-indicator" id="slideIndicator">1 / 8</span>
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" aria-label="Toggle fullscreen">⛶ Fullscreen</button>
+            </div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="main-content">
+            <div class="slide-area">
+                <div class="slide-container">
+
+                    <!-- ==================== SLIDE 0: TITLE ==================== -->
+                    <div class="slide-content active" data-slide="0">
+                        <div class="title-slide">
+                            <h1>The AI Revolution<br>February 2026</h1>
+                            <div class="subtitle">6 weeks that changed software forever</div>
+                            <div class="byline">A personal perspective by Ajith Ganesan</div>
+                            <div class="stat-ribbon">
+                                <div class="stat-pill"><strong>$680B+</strong> &nbsp;Mag 7 AI Capex</div>
+                                <div class="stat-pill"><strong>29M</strong> &nbsp;Claude Code daily installs</div>
+                                <div class="stat-pill"><strong>$285B</strong> &nbsp;wiped in one day</div>
+                                <div class="stat-pill"><strong>150GB</strong> &nbsp;gov data stolen via AI</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 1: WHO SAYS WHAT ==================== -->
+                    <div class="slide-content" data-slide="1">
+                        <div class="section-label">Part 1</div>
+                        <div class="slide-title">Who Says What</div>
+                        <div class="slide-subtitle">The most powerful voices in tech agree: the era of human-written code is ending.</div>
+
+                        <div class="group-label">🏢 Tech CEOs & Leaders</div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-green">JH</div>
+                                <div>
+                                    <div class="quote-name">Jensen Huang</div>
+                                    <div class="quote-role">CEO, NVIDIA ($3.4T market cap)</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"Don't learn to code. The programming language of the future is human language. Everybody in the world is now a programmer."</div>
+                            <div class="quote-source">World Government Summit, Dubai 2025 · <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/jensen-huang-advises-against-learning-to-code-leave-it-up-to-ai" target="_blank">Tom's Hardware</a></div>
+                        </div>
+
+                        <div class="video-row">
+                            <div>
+                                <div class="video-embed short-embed">
+                                    <iframe src="https://www.youtube.com/embed/tXTsiwu1_9E" loading="lazy" allowfullscreen></iframe>
+                                </div>
+                                <div class="video-label">Short Clip #2</div>
+                            </div>
+                            <div>
+                                <div class="video-embed short-embed">
+                                    <iframe src="https://www.youtube.com/embed/LV-Uu7GvpUo" loading="lazy" allowfullscreen></iframe>
+                                </div>
+                                <div class="video-label">Short Clip #3</div>
+                            </div>
+                            <div>
+                                <div class="video-embed short-embed">
+                                    <iframe src="https://www.youtube.com/embed/eaRGX9wVlU0" loading="lazy" allowfullscreen></iframe>
+                                </div>
+                                <div class="video-label">Short Clip #4</div>
+                            </div>
+                            <div>
+                                <div class="video-embed short-embed">
+                                    <iframe src="https://www.youtube.com/embed/l-gaR8DYov8" loading="lazy" allowfullscreen></iframe>
+                                </div>
+                                <div class="video-label">Short Clip #5</div>
+                            </div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-purple">DA</div>
+                                <div>
+                                    <div class="quote-name">Dario Amodei</div>
+                                    <div class="quote-role">CEO, Anthropic ($380B valuation)</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"Literally 90% of our code is written by Claude. In 3-6 months, AI will be writing essentially all code."</div>
+                            <div class="quote-source">Podcast interviews, Feb 2026 · <a href="https://futurism.com/six-months-anthropic-coding" target="_blank">Futurism</a></div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-blue">SN</div>
+                                <div>
+                                    <div class="quote-name">Satya Nadella</div>
+                                    <div class="quote-role">CEO, Microsoft</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"20-30% of code in Microsoft repositories is now AI-generated. We're seeing a fundamental shift in how software is built."</div>
+                            <div class="quote-source">Davos 2026 · <a href="https://www.weforum.org" target="_blank">World Economic Forum</a></div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-cyan">SP</div>
+                                <div>
+                                    <div class="quote-name">Sundar Pichai</div>
+                                    <div class="quote-role">CEO, Alphabet / Google</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"More than 30% of new Google code is now AI-generated, and reviewed and accepted by engineers."</div>
+                            <div class="quote-source">Alphabet Q3 2025 Earnings Call · <a href="https://abc.xyz/investor/" target="_blank">Alphabet IR</a></div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-indigo">MZ</div>
+                                <div>
+                                    <div class="quote-name">Mark Zuckerberg</div>
+                                    <div class="quote-role">CEO, Meta</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"We expect AI will be writing the majority of our code by mid-2026."</div>
+                            <div class="quote-source">Q4 2025 Earnings Call · <a href="https://investor.fb.com" target="_blank">Meta IR</a></div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-teal">MS</div>
+                                <div>
+                                    <div class="quote-name">Mustafa Suleyman</div>
+                                    <div class="quote-role">CEO of Microsoft AI, Co-founder of DeepMind</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"AI is the new atomic energy. It's going to be the most transformative general-purpose technology of our time."</div>
+                            <div class="quote-source">WEF Davos 2025</div>
+                        </div>
+
+                        <div class="group-label">💰 Investors & Visionaries</div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-orange">VK</div>
+                                <div>
+                                    <div class="quote-name">Vinod Khosla</div>
+                                    <div class="quote-role">Founder, Khosla Ventures</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"80% of software engineering jobs will be gone in 5 years. AI will write most code, and the remaining engineers will be 10x more productive."</div>
+                            <div class="quote-source">Multiple interviews, 2025-2026</div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-red">AK</div>
+                                <div>
+                                    <div class="quote-name">Andrej Karpathy</div>
+                                    <div class="quote-role">Ex-Tesla AI Director, Co-founder OpenAI, Coined "Vibe Coding"</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"The hottest new programming language is English."</div>
+                            <div class="quote-source">X/Twitter, Jan 2023 — now proven right · <a href="https://x.com/karpathy/status/1617979122625712128" target="_blank">Original tweet</a></div>
+                        </div>
+
+                        <div class="group-label">🔧 Programming Language Creators</div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-yellow">RD</div>
+                                <div>
+                                    <div class="quote-name">Ryan Dahl</div>
+                                    <div class="quote-role">Creator of Node.js & Deno</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"The era of humans writing code is over."</div>
+                            <div class="quote-source">X/Twitter, Jan 20, 2026</div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-slate">GvR</div>
+                                <div>
+                                    <div class="quote-name">Guido van Rossum</div>
+                                    <div class="quote-role">Creator of Python</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"AI is transforming how Python is written. I've been exploring AI-assisted coding and it's genuinely impressive what these models can do."</div>
+                            <div class="quote-source">PyCon Talks, 2025</div>
+                        </div>
+
+                        <div class="quote-card">
+                            <div class="quote-header">
+                                <div class="quote-avatar av-pink">LT</div>
+                                <div>
+                                    <div class="quote-name">Linus Torvalds</div>
+                                    <div class="quote-role">Creator of Linux & Git</div>
+                                </div>
+                            </div>
+                            <div class="quote-text">"I've started using AI coding assistants. AI-generated code submissions to the Linux kernel are increasing — the genie is out of the bottle."</div>
+                            <div class="quote-source">Open Source Summit 2025</div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 2: THE CODE IS EATING ITSELF ==================== -->
+                    <div class="slide-content" data-slide="2">
+                        <div class="section-label">Part 2</div>
+                        <div class="slide-title">The Code Is Eating Itself</div>
+                        <div class="slide-subtitle">AI is now writing the code that builds AI. Here's where each major company stands.</div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-anthropic">A</div>
+                            <div class="stat-info">
+                                <div class="stat-company">Anthropic</div>
+                                <div class="stat-detail">~90% of code written by Claude — their own AI writes their AI</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="90"></div></div>
+                                <div class="stat-source"><a href="https://futurism.com/six-months-anthropic-coding" target="_blank">Dario Amodei, Feb 2026</a></div>
+                            </div>
+                            <div class="stat-pct">~90%</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-amazon">a</div>
+                            <div class="stat-info">
+                                <div class="stat-company">Amazon</div>
+                                <div class="stat-detail">"Most code" now written by Amazon Q Developer. 79% of internal code reviews AI-assisted</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="75"></div></div>
+                                <div class="stat-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, Feb 2025</a></div>
+                            </div>
+                            <div class="stat-pct">~75%</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-github">GH</div>
+                            <div class="stat-info">
+                                <div class="stat-company">GitHub (across all users)</div>
+                                <div class="stat-detail">46% of all code on the platform is AI-generated via Copilot</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="46"></div></div>
+                                <div class="stat-source"><a href="https://github.blog" target="_blank">GitHub Annual Report 2025</a></div>
+                            </div>
+                            <div class="stat-pct">46%</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-google">G</div>
+                            <div class="stat-info">
+                                <div class="stat-company">Google / Alphabet</div>
+                                <div class="stat-detail">30%+ of new code AI-generated, reviewed and accepted by engineers</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="32"></div></div>
+                                <div class="stat-source"><a href="https://abc.xyz/investor/" target="_blank">Sundar Pichai, Q3 2025 Earnings</a></div>
+                            </div>
+                            <div class="stat-pct">30%+</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-ms">M</div>
+                            <div class="stat-info">
+                                <div class="stat-company">Microsoft</div>
+                                <div class="stat-detail">20-30% of repo code AI-generated. GitHub Copilot powers their internal workflow</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="25"></div></div>
+                                <div class="stat-source"><a href="https://www.weforum.org" target="_blank">Satya Nadella, Davos 2026</a></div>
+                            </div>
+                            <div class="stat-pct">20-30%</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-logo logo-meta">M</div>
+                            <div class="stat-info">
+                                <div class="stat-company">Meta</div>
+                                <div class="stat-detail">"Half by mid-2026" — rapid AI code adoption accelerating</div>
+                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="40"></div></div>
+                                <div class="stat-source"><a href="https://investor.fb.com" target="_blank">Mark Zuckerberg, Q4 2025</a></div>
+                            </div>
+                            <div class="stat-pct">→ 50%</div>
+                        </div>
+
+                        <div class="callout">
+                            <div class="callout-big">Claude Code: 29M+ Daily Installs</div>
+                            <div class="callout-sub">4% of all GitHub commits globally · $2.5B annual revenue run rate · Feb 2026</div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 3: FOLLOW THE MONEY ==================== -->
+                    <div class="slide-content" data-slide="3">
+                        <div class="section-label">Part 3</div>
+                        <div class="slide-title">Follow the Money</div>
+                        <div class="slide-subtitle">The Magnificent 7 are committing $680B+ to AI infrastructure in 2025-2026. This is the largest capital deployment in human history.</div>
+
+                        <div class="money-total">
+                            <div class="big-num">$680B+</div>
+                            <div class="context">Combined Mag 7 AI Capex Commitment (2025-2026)</div>
+                            <div class="context" style="margin-top:0.3rem; font-size:0.75rem;">For comparison: the Apollo program cost ~$170B in today's dollars. This is 4× that. Every year.</div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$100B+</div>
+                            <div class="money-info">
+                                <div class="money-company">Amazon (AWS)</div>
+                                <div class="money-what">AWS AI infrastructure, custom Trainium chips, data centers</div>
+                                <div class="money-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, 2025 guidance</a></div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$80B+</div>
+                            <div class="money-info">
+                                <div class="money-company">Microsoft</div>
+                                <div class="money-what">Azure AI, OpenAI partnership, Copilot ecosystem, data centers</div>
+                                <div class="money-source"><a href="https://www.microsoft.com/en-us/investor" target="_blank">FY2025 guidance</a></div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$75B+</div>
+                            <div class="money-info">
+                                <div class="money-company">Google / Alphabet</div>
+                                <div class="money-what">TPU v6, Gemini models, DeepMind expansion, AI-first search</div>
+                                <div class="money-source"><a href="https://abc.xyz/investor/" target="_blank">2025 earnings guidance</a></div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$60-65B</div>
+                            <div class="money-info">
+                                <div class="money-company">Meta</div>
+                                <div class="money-what">Llama models, AI research campus, open-source AI leadership</div>
+                                <div class="money-source"><a href="https://investor.fb.com" target="_blank">Zuckerberg, Q4 2025</a></div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$20B+</div>
+                            <div class="money-info">
+                                <div class="money-company">Apple</div>
+                                <div class="money-what">On-device AI, Apple Intelligence, custom AI silicon</div>
+                                <div class="money-source">Estimated from capex filings</div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">Record</div>
+                            <div class="money-info">
+                                <div class="money-company">NVIDIA</div>
+                                <div class="money-what">Blackwell GPU production, AI factory partnerships, R&D at record levels</div>
+                                <div class="money-source"><a href="https://investor.nvidia.com" target="_blank">NVIDIA IR</a></div>
+                            </div>
+                        </div>
+
+                        <div class="money-card">
+                            <div class="money-amount">$10B+</div>
+                            <div class="money-info">
+                                <div class="money-company">Tesla</div>
+                                <div class="money-what">Dojo supercomputer, FSD training, Optimus robot AI</div>
+                                <div class="money-source"><a href="https://ir.tesla.com" target="_blank">Elon Musk, 2025</a></div>
+                            </div>
+                        </div>
+
+                        <div class="callout">
+                            <div class="callout-big">Anthropic: $380B Valuation</div>
+                            <div class="callout-sub">$30B Series G · Feb 2026 · From startup to larger than Goldman Sachs in 3 years</div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 4: TIMELINE ==================== -->
+                    <div class="slide-content" data-slide="4">
+                        <div class="section-label">Part 4</div>
+                        <div class="slide-title">What Actually Happened</div>
+                        <div class="slide-subtitle">A chronological timeline of the most dramatic 8 weeks in AI history.</div>
+
+                        <div class="timeline">
+
+                            <div class="tl-item major">
+                                <div class="tl-date">January 3, 2026</div>
+                                <div class="tl-title">🇻🇪 U.S. Forces Capture Venezuela's Maduro Using Claude AI</div>
+                                <div class="tl-desc">U.S. special operations forces raid Caracas, capture President Maduro and his wife. 83 killed. Claude was deployed through Palantir for AI-enabled targeting — violating Anthropic's own usage policies against facilitating violence.</div>
+                                <div class="tl-source"><a href="https://www.usnews.com/news/world/articles/2026-02-13/us-used-anthropics-claude-during-the-venezuela-raid-wsj-reports" target="_blank">WSJ (via US News)</a> · <a href="https://www.foxnews.com/us/ai-tool-claude-helped-capture-venezuelan-dictator-maduro-us-military-raid-operation-report" target="_blank">Fox News</a></div>
+                                <span class="tl-tag war">Military AI</span>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">January 20, 2026</div>
+                                <div class="tl-title">Ryan Dahl: "The era of humans writing code is over"</div>
+                                <div class="tl-desc">The creator of Node.js and Deno posts a declaration that resonates across the entire developer community. A symbolic turning point.</div>
+                                <span class="tl-tag culture">Culture Shift</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 2, 2026</div>
+                                <div class="tl-title">📺 Anthropic's First-Ever Super Bowl Ad</div>
+                                <div class="tl-desc">Four ads by agency Mother mock ChatGPT's upcoming ads. Dr. Dre soundtrack. Sam Altman calls them "deceptive." Claude jumps from #41 to #7 on the App Store. 11% user surge.</div>
+                                <div class="tl-source"><a href="https://techcrunch.com/2026/02/13/anthropics-super-bowl-ads-mocking-ai-with-ads-helped-push-claudes-app-into-the-top-10/" target="_blank">TechCrunch</a> · <a href="https://www.cnbc.com/2026/02/13/anthropic-open-ai-super-bowl-ads.html" target="_blank">CNBC</a></div>
+                                <span class="tl-tag culture">Culture</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 3, 2026</div>
+                                <div class="tl-title">💥 SaaSpocalypse: $285B Wiped in One Day</div>
+                                <div class="tl-desc">The largest single-day destruction of SaaS market value ever. Thomson Reuters -18%, LegalZoom -19.68%, Intuit -12%. Markets realize AI agents are replacing entire SaaS categories.</div>
+                                <span class="tl-tag market">Market Crash</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 7, 2026</div>
+                                <div class="tl-title">📉 IBM Crashes $40B — Claude Code Modernizes COBOL Overnight</div>
+                                <div class="tl-desc">Claude Code automatically modernizes legacy COBOL banking systems. IBM's mainframe consulting revenue at risk. Worst single-day drop since 2000.</div>
+                                <span class="tl-tag market">Market Crash</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 13, 2026</div>
+                                <div class="tl-title">📰 WSJ Breaks Venezuela-Claude Story</div>
+                                <div class="tl-desc">Wall Street Journal reveals Claude was used in the Maduro raid via Palantir. Pentagon-Anthropic tensions explode. Anthropic draws two red lines: no mass surveillance, no autonomous weapons.</div>
+                                <div class="tl-source"><a href="https://www.nbcnews.com/tech/security/anthropic-ai-defense-war-venezuela-maduro-rcna259603" target="_blank">NBC News</a> · <a href="https://www.inc.com/kevin-haynes/anthropic-blasts-pentagons-use-of-its-ai-tool-in-venezuela-raid-may-void-200m-contract/91303320" target="_blank">Inc.</a></div>
+                                <span class="tl-tag war">Military AI</span>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">February 14, 2026</div>
+                                <div class="tl-title">🚀 Claude 4.6 Opus Released</div>
+                                <div class="tl-desc">Scores 72.5% on SWE-bench, 85% on GPQA-Diamond. The most capable AI coding model ever released.</div>
+                                <span class="tl-tag launch">Launch</span>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">February 18, 2026</div>
+                                <div class="tl-title">Anthropic Hits $380B Valuation</div>
+                                <div class="tl-desc">Closes $30B Series G. Now valued higher than Goldman Sachs. From research lab to one of the most valuable companies on Earth in 3 years.</div>
+                                <span class="tl-tag market">Valuation</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 19-20, 2026</div>
+                                <div class="tl-title">⚔️ Pentagon vs Anthropic Showdown</div>
+                                <div class="tl-desc">Pentagon CTO Emil Michael tells Anthropic to "cross the Rubicon" on military AI. Hegseth gives 72-hour ultimatum: loosen AI rules or lose $200M contract. Anthropic holds firm.</div>
+                                <div class="tl-source"><a href="https://defensescoop.com/2026/02/19/pentagon-anthropic-dispute-military-ai-hegseth-emil-michael/" target="_blank">DefenseScoop</a> · <a href="https://futurism.com/artificial-intelligence/pentagon-issues-threat-anthropic" target="_blank">Futurism</a></div>
+                                <span class="tl-tag war">Military AI</span>
+                            </div>
+
+                            <div class="tl-item major">
+                                <div class="tl-date">February 24, 2026</div>
+                                <div class="tl-title">🇲🇽 Mexico Government Hack: 150GB Stolen via Jailbroken Claude</div>
+                                <div class="tl-desc">Hackers use a jailbroken version of Claude to breach Mexican government systems, extracting 150GB of sensitive data. A new category of AI-enabled cyberattack.</div>
+                                <div class="tl-source"><a href="https://www.bloomberg.com" target="_blank">Bloomberg, Feb 25, 2026</a></div>
+                                <span class="tl-tag hack">AI Cyberattack</span>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">February 25, 2026</div>
+                                <div class="tl-title">Alibaba Drops Qwen 3.5</div>
+                                <div class="tl-desc">Open-source model matching Claude 4.5 benchmarks. The AI model race goes global as China narrows the gap.</div>
+                                <span class="tl-tag launch">Launch</span>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">February 26, 2026</div>
+                                <div class="tl-title">Claude Code: 29M Daily Installs</div>
+                                <div class="tl-desc">Responsible for 4% of all GitHub commits globally. $2.5B annual revenue run rate. The fastest-adopted developer tool in history.</div>
+                                <span class="tl-tag launch">Milestone</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 5: CURATED POSTS ==================== -->
+                    <div class="slide-content" data-slide="5">
+                        <div class="section-label">Part 5</div>
+                        <div class="slide-title">The Discourse</div>
+                        <div class="slide-subtitle">What people are saying on X.</div>
+
+                        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto;">
+
+                            <div class="tweet-card">
+                                <div class="tweet-header">
+                                    <span class="tweet-author">Andrej Karpathy</span>
+                                    <span class="tweet-handle">@karpathy</span>
+                                </div>
+                                <div class="tweet-text">"It is hard to communicate how much programming has changed due to AI in the last 2 months... coding agents basically didn't work before December and basically work since... programming is becoming unrecognizable. You're spinning up AI agents, giving them tasks <em>in English</em>..."</div>
+                                <a href="https://x.com/karpathy/status/2026731645169185220" target="_blank">View on X &rarr;</a>
+                            </div>
+
+                            <div class="tweet-card">
+                                <div class="tweet-header">
+                                    <span class="tweet-author">Jared Friedman</span>
+                                    <span class="tweet-handle">@snowmaker</span>
+                                </div>
+                                <div class="tweet-text">"Software engineering changed more in the last 3 months than the preceding 30 years. Everything about running a software company needs to be rethought from first principles."</div>
+                                <a href="https://x.com/snowmaker/status/2026555857845256354" target="_blank">View on X &rarr;</a>
+                            </div>
+
+                            <div class="tweet-card">
+                                <div class="tweet-header">
+                                    <span class="tweet-author">The Kobeissi Letter</span>
+                                    <span class="tweet-handle">@KobeissiLetter</span>
+                                </div>
+                                <div class="tweet-text">"BREAKING: Amazon, Google, Meta, Microsoft, xAI, Oracle and OpenAI are set to sign an agreement with the Trump Administration to generate their own electricity supply for AI data centers..."</div>
+                                <a href="https://x.com/kobeissiletter/status/2026719177168281985" target="_blank">View on X &rarr;</a>
+                            </div>
+
+                            <div class="tweet-card">
+                                <div class="tweet-header">
+                                    <span class="tweet-author">Max Stoiber</span>
+                                    <span class="tweet-handle">@mxstbr</span>
+                                </div>
+                                <div class="tweet-text">"This is insane. Next.js rebuilt based on Vite, and it only took one week and $1,100 in tokens?! Code really doesn't matter anymore. Crazy."</div>
+                                <a href="https://x.com/mxstbr/status/2026421496374345892" target="_blank">View on X &rarr;</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 6: PERSONAL EXAMPLES ==================== -->
+                    <div class="slide-content" data-slide="6">
+                        <div class="section-label">Part 6</div>
+                        <div class="slide-title">My AI Workflow in Action</div>
+                        <div class="slide-subtitle">Real screenshots from today — building a semiconductor resource calculator entirely with Claude Code.</div>
+
+                        <div class="example-grid">
+                            <div class="example-card">
+                                <img src="images/claude-code-4.jpeg" alt="Claude Code planning architecture with config-driven design">
+                                <div class="example-caption">
+                                    <strong>Architecture Planning</strong>
+                                    Claude designs a config-driven system — YAML configs, FastAPI backend, MongoDB, React frontend — through natural conversation. Interactive questions refine the approach.
+                                </div>
+                            </div>
+
+                            <div class="example-card">
+                                <img src="images/claude-code-3.jpeg" alt="Claude Code interactive Q&A with multi-step workflow">
+                                <div class="example-caption">
+                                    <strong>Interactive Refinement</strong>
+                                    The AI asks clarifying questions about scaling dimensions, platform base costs, and app catalogs — then generates the implementation once aligned.
+                                </div>
+                            </div>
+
+                            <div class="example-card">
+                                <img src="images/claude-code-2.jpeg" alt="Claude Code deep plan review and feedback">
+                                <div class="example-caption">
+                                    <strong>Deep Code Review</strong>
+                                    Claude reviews its own implementation plan, identifies gaps in units, HA modeling, storage tiering, and GPU requirements — then proposes fixes.
+                                </div>
+                            </div>
+
+                            <div class="example-card">
+                                <img src="images/claude-code-1.jpeg" alt="Claude Code writing React components and project structure">
+                                <div class="example-caption">
+                                    <strong>Full Project Scaffolding</strong>
+                                    From a single conversation: React components, Pydantic models, MongoDB setup, FastAPI routes, calculation engine, and a test suite — all generated in under 2 minutes.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="callout">
+                            <div class="callout-big">Zero lines of code written by hand</div>
+                            <div class="callout-sub">This entire project — architecture, backend, frontend, tests — was built through conversation with Claude Code in one session.</div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SLIDE 7: CLOSING ==================== -->
+                    <div class="slide-content" data-slide="7">
+                        <div class="closing-slide">
+                            <div class="section-label" style="margin-bottom:1rem;">February 2026</div>
+                            <h2>"We are living through the fastest technological shift in human history."</h2>
+
+                            <div class="closing-stats">
+                                <div class="closing-stat">
+                                    <div class="num">$680B+</div>
+                                    <div class="label">Mag 7 AI Capex</div>
+                                </div>
+                                <div class="closing-stat">
+                                    <div class="num">90%</div>
+                                    <div class="label">Anthropic code by AI</div>
+                                </div>
+                                <div class="closing-stat">
+                                    <div class="num">$285B</div>
+                                    <div class="label">SaaS value wiped in 1 day</div>
+                                </div>
+                                <div class="closing-stat">
+                                    <div class="num">29M</div>
+                                    <div class="label">Claude Code daily installs</div>
+                                </div>
+                                <div class="closing-stat">
+                                    <div class="num">$380B</div>
+                                    <div class="label">Anthropic valuation</div>
+                                </div>
+                            </div>
+
+                            <div style="font-size:0.9rem; color:#6b7280; max-width:600px; margin:0 auto; line-height:1.6;">
+                                Claude wrote code to capture a president, crashed IBM by $40B, had its Super Bowl ad watched by 120M people, and got used to hack a government — all in 6 weeks.
+                            </div>
+
+                            <div class="watermark">Built with Claude · February 2026</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <h3>Chapters</h3>
+                <div class="slide-list">
+                    <button class="slide-btn active" data-slide="0" onclick="goTo(0)">🎬 The AI Revolution</button>
+
+                    <div class="sidebar-section"><h3>Part 1 · Voices</h3></div>
+                    <button class="slide-btn" data-slide="1" onclick="goTo(1)">💬 Who Says What</button>
+
+                    <div class="sidebar-section"><h3>Part 2 · Code</h3></div>
+                    <button class="slide-btn" data-slide="2" onclick="goTo(2)">⚡ The Code Is Eating Itself</button>
+
+                    <div class="sidebar-section"><h3>Part 3 · Capital</h3></div>
+                    <button class="slide-btn" data-slide="3" onclick="goTo(3)">💰 Follow the Money</button>
+
+                    <div class="sidebar-section"><h3>Part 4 · Timeline</h3></div>
+                    <button class="slide-btn" data-slide="4" onclick="goTo(4)">📅 What Actually Happened</button>
+
+                    <div class="sidebar-section"><h3>Part 5 · Discourse</h3></div>
+                    <button class="slide-btn" data-slide="5" onclick="goTo(5)">💬 The Discourse</button>
+
+                    <div class="sidebar-section"><h3>Part 6 · Personal</h3></div>
+                    <button class="slide-btn" data-slide="6" onclick="goTo(6)">🛠️ My AI Workflow</button>
+
+                    <div class="sidebar-section"><h3></h3></div>
+                    <button class="slide-btn" data-slide="7" onclick="goTo(7)">🏁 Closing</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAV FOOTER -->
+        <div class="nav-footer">
+            <button class="nav-btn prev" onclick="prev()" id="prevBtn" disabled aria-label="Previous slide">← Previous</button>
+            <div class="slide-dots" id="slideDots" role="tablist" aria-label="Slide navigation"></div>
+            <button class="nav-btn next" onclick="next()" id="nextBtn" aria-label="Next slide">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        const TOTAL = 8;
+        let current = 0;
+
+        // Build dots
+        const dotsContainer = document.getElementById('slideDots');
+        for (let i = 0; i < TOTAL; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.setAttribute('role', 'tab');
+            dot.onclick = () => goTo(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function goTo(n) {
+            if (n < 0 || n >= TOTAL) return;
+            // Deactivate all
+            document.querySelectorAll('.slide-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+
+            current = n;
+
+            // Activate
+            const slide = document.querySelector(`.slide-content[data-slide="${n}"]`);
+            slide.classList.add('active');
+            slide.scrollTop = 0;
+
+            // Sidebar buttons (matched by data-slide attribute)
+            const activeBtn = document.querySelector(`.slide-btn[data-slide="${n}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Dots
+            const dots = document.querySelectorAll('.dot');
+            if (dots[n]) dots[n].classList.add('active');
+
+            // Indicator
+            document.getElementById('slideIndicator').textContent = `${n + 1} / ${TOTAL}`;
+
+            // Nav buttons
+            document.getElementById('prevBtn').disabled = (n === 0);
+            document.getElementById('nextBtn').disabled = (n === TOTAL - 1);
+
+            // Animate stat bars if on slide 2
+            if (n === 2) animateStatBars();
+
+        }
+
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+            const tag = document.activeElement?.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+            if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+        });
+
+        // Touch swipe
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 60) {
+                diff > 0 ? next() : prev();
+            }
+        });
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        let barsAnimated = false;
+        function animateStatBars() {
+            if (barsAnimated) return;
+            barsAnimated = true;
+            document.querySelectorAll('.stat-bar').forEach(bar => {
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = bar.dataset.width + '%';
+                }, 100);
+            });
+        }
+
+    </script>
+</body>
+</html>

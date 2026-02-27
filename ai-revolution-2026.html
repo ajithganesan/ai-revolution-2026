@@ -983,6 +983,61 @@
             font-size: 0.85rem;
         }
 
+        /* Project Viyan story grid */
+        .viyan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .viyan-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .viyan-card:hover {
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.1);
+        }
+
+        .viyan-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .viyan-card .viyan-caption {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.7rem;
+            color: #4b5563;
+            line-height: 1.3;
+        }
+
+        .viyan-card .viyan-caption strong {
+            color: #111827;
+            display: block;
+            margin-bottom: 0.15rem;
+            font-size: 0.75rem;
+        }
+
+        /* Before/After CITO highlight cards — span full width */
+        .viyan-cito-before, .viyan-cito-after {
+            grid-column: span 3;
+        }
+
+        /* Section divider between Viyan and Work */
+        .section-divider {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 2rem 0 1.5rem;
+        }
+
         /* Stat Hero (Anthropic highlight) */
         .stat-hero {
             background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
@@ -1662,18 +1717,117 @@
                         </div>
                     </div>
 
-                    <!-- ==================== SLIDE 6: PERSONAL EXAMPLES ==================== -->
+                    <!-- ==================== SLIDE 6: MY AI IN ACTION ==================== -->
                     <div class="slide-content" data-slide="6">
-                        <div class="section-label">Part 6</div>
-                        <div class="slide-title">My AI Workflow in Action</div>
-                        <div class="slide-subtitle">Real screenshots from today — building a semiconductor resource calculator entirely with Claude Code.</div>
+
+                        <!-- Part 6a: Project Viyan -->
+                        <div class="section-label">Part 6a — Personal</div>
+                        <div class="slide-title">Project Viyan</div>
+                        <div class="slide-subtitle">My son struggled with Dutch reading comprehension (Begrijpend Lezen). I used AI to build a personalised practice tool — and it worked.</div>
+
+                        <div class="viyan-grid">
+                            <!-- Before CITO — full width -->
+                            <div class="viyan-card viyan-cito-before">
+                                <img src="images/project viyan/cito-begrijpend-lezen.png" alt="CITO Begrijpend Lezen score — before">
+                                <div class="viyan-caption">
+                                    <strong>Before — CITO Begrijpend Lezen</strong>
+                                    Viyan's reading comprehension scores were below the target level. Time to act.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-requirements-doc.png" alt="Google Docs reading comprehension master document">
+                                <div class="viyan-caption">
+                                    <strong>Requirements Doc</strong>
+                                    Mapped the full Dutch curriculum for Begrijpend Lezen into a master document.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-domain-framework.png" alt="Cross-grade domain weightings table">
+                                <div class="viyan-caption">
+                                    <strong>Domain Framework</strong>
+                                    Built a cross-grade weighting matrix: Literal Comprehension, Vocabulary, Inference, and more.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-generator-ui.png" alt="Begrijpend Lezen Generator tool UI">
+                                <div class="viyan-caption">
+                                    <strong>Generator UI</strong>
+                                    Built "Begrijpend Lezen Generator" — select category, grade, and domain distribution.
+                                    <a href="https://github.com/ajithganesan/codocent-/blob/feature/image-integration/backend/reading_comprehension/materials/icl_from_books/M6/Informatieve%20teksten/02_een_bril.md?plain=1" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.65rem; color:#7c3aed; text-decoration:none; font-weight:500;">View ICL example on GitHub &rarr;</a>
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-generated-story.png" alt="De Vliegende Boekenkast — generated reading passage">
+                                <div class="viyan-caption">
+                                    <strong>Generated Story</strong>
+                                    AI creates age-appropriate Dutch reading passages with custom illustrations.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-annotated-text.png" alt="Story text with color-coded question annotations">
+                                <div class="viyan-caption">
+                                    <strong>Annotated Text</strong>
+                                    Color-coded annotations map each question back to the source passage.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-question-types.png" alt="Multiple choice questions — Interpreteren, Begrijpen, Met Diagram">
+                                <div class="viyan-caption">
+                                    <strong>Question Types</strong>
+                                    Multiple-choice questions across comprehension domains: Interpreteren, Begrijpen, Met Diagram.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-answer-notes.png" alt="Answer key and lesson notes with domain verification">
+                                <div class="viyan-caption">
+                                    <strong>Answer Key &amp; Notes</strong>
+                                    Full answer key plus "Lesnotities" — lesson notes with domain verification.
+                                </div>
+                            </div>
+
+                            <div class="viyan-card">
+                                <img src="images/project viyan/viyan-backend-code.png" alt="Codocent backend code in dark-themed editor">
+                                <div class="viyan-caption">
+                                    <strong>Backend Code</strong>
+                                    The full platform — "Codocent" — built with AI assistance, from backend to frontend.
+                                </div>
+                            </div>
+
+                            <!-- After CITO — full width -->
+                            <div class="viyan-card viyan-cito-after">
+                                <img src="images/project viyan/viyan-cito-after.png" alt="CITO Begrijpend Lezen score — after improvement">
+                                <div class="viyan-caption">
+                                    <strong>After — CITO Begrijpend Lezen</strong>
+                                    Scores improved. A personal AI project that made a real difference.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="callout">
+                            <div class="callout-big">From struggling to improving — powered by AI</div>
+                            <div class="callout-sub">Built a complete Dutch reading comprehension platform with AI — personalised stories, curriculum-aligned questions, and measurable results.</div>
+                        </div>
+
+                        <hr class="section-divider">
+
+                        <!-- Part 6b: Work Setup -->
+                        <div class="section-label">Part 6b — Work</div>
+                        <div class="slide-title" style="font-size:1.3rem; margin-bottom:0.5rem;">Work Setup — Claude Code</div>
+                        <div class="slide-subtitle">Building a semiconductor resource calculator entirely through conversation.</div>
 
                         <div class="example-grid">
                             <div class="example-card">
                                 <img src="images/claude-code-4.jpeg" alt="Claude Code planning architecture with config-driven design">
                                 <div class="example-caption">
                                     <strong>Architecture Planning</strong>
-                                    Claude designs a config-driven system — YAML configs, FastAPI backend, MongoDB, React frontend — through natural conversation. Interactive questions refine the approach.
+                                    Claude designs a config-driven system — YAML configs, FastAPI backend, MongoDB, React frontend — through natural conversation.
                                 </div>
                             </div>
 
@@ -1681,7 +1835,7 @@
                                 <img src="images/claude-code-3.jpeg" alt="Claude Code interactive Q&A with multi-step workflow">
                                 <div class="example-caption">
                                     <strong>Interactive Refinement</strong>
-                                    The AI asks clarifying questions about scaling dimensions, platform base costs, and app catalogs — then generates the implementation once aligned.
+                                    The AI asks clarifying questions about scaling dimensions, platform base costs, and app catalogs.
                                 </div>
                             </div>
 
@@ -1689,7 +1843,7 @@
                                 <img src="images/claude-code-2.jpeg" alt="Claude Code deep plan review and feedback">
                                 <div class="example-caption">
                                     <strong>Deep Code Review</strong>
-                                    Claude reviews its own implementation plan, identifies gaps in units, HA modeling, storage tiering, and GPU requirements — then proposes fixes.
+                                    Claude reviews its own plan, identifies gaps in units, HA modeling, storage tiering, and GPU requirements.
                                 </div>
                             </div>
 
@@ -1697,7 +1851,7 @@
                                 <img src="images/claude-code-1.jpeg" alt="Claude Code writing React components and project structure">
                                 <div class="example-caption">
                                     <strong>Full Project Scaffolding</strong>
-                                    From a single conversation: React components, Pydantic models, MongoDB setup, FastAPI routes, calculation engine, and a test suite — all generated in under 2 minutes.
+                                    React components, Pydantic models, MongoDB setup, FastAPI routes, calculation engine, and tests — all in under 2 minutes.
                                 </div>
                             </div>
                         </div>
@@ -1770,7 +1924,7 @@
                     <button class="slide-btn" data-slide="5" onclick="goTo(5)">💬 The Discourse</button>
 
                     <div class="sidebar-section"><h3>Part 6 · Personal</h3></div>
-                    <button class="slide-btn" data-slide="6" onclick="goTo(6)">🛠️ My AI Workflow</button>
+                    <button class="slide-btn" data-slide="6" onclick="goTo(6)">🛠️ My AI in Action</button>
 
                     <button class="slide-btn" data-slide="7" onclick="goTo(7)">🏁 Closing</button>
                 </div>

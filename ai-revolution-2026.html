@@ -2104,10 +2104,8 @@
             lightboxOpen = false;
         }
 
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
-                closeLightbox();
-            }
+        lightbox.addEventListener('click', () => {
+            closeLightbox();
         });
 
     </script>

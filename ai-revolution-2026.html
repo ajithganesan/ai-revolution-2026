@@ -986,7 +986,7 @@
         /* Project Viyan story grid */
         .viyan-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
             margin: 1rem 0;
         }
@@ -1010,6 +1010,7 @@
             width: 100%;
             height: auto;
             display: block;
+            cursor: pointer;
         }
 
         .viyan-card .viyan-caption {
@@ -1028,7 +1029,48 @@
 
         /* Before/After CITO highlight cards — span full width */
         .viyan-cito-before, .viyan-cito-after {
-            grid-column: span 3;
+            grid-column: span 2;
+        }
+
+        /* Lightbox overlay */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .lightbox-close:hover {
+            opacity: 1;
         }
 
         /* Section divider between Viyan and Work */
@@ -1723,7 +1765,7 @@
                         <!-- Part 6a: Project Viyan -->
                         <div class="section-label">Part 6a — Personal</div>
                         <div class="slide-title">Project Viyan</div>
-                        <div class="slide-subtitle">My son struggled with Dutch reading comprehension (Begrijpend Lezen). I used AI to build a personalised practice tool — and it worked.</div>
+                        <div class="slide-subtitle">My son struggled with Dutch reading comprehension (Begrijpend Lezen).</div>
 
                         <div class="viyan-grid">
                             <!-- Before CITO — full width -->
@@ -1756,7 +1798,6 @@
                                 <div class="viyan-caption">
                                     <strong>Generator UI</strong>
                                     Built "Begrijpend Lezen Generator" — select category, grade, and domain distribution.
-                                    <a href="https://github.com/ajithganesan/codocent-/blob/feature/image-integration/backend/reading_comprehension/materials/icl_from_books/M6/Informatieve%20teksten/02_een_bril.md?plain=1" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.65rem; color:#7c3aed; text-decoration:none; font-weight:500;">View ICL example on GitHub &rarr;</a>
                                 </div>
                             </div>
 
@@ -1797,6 +1838,7 @@
                                 <div class="viyan-caption">
                                     <strong>Backend Code</strong>
                                     The full platform — "Codocent" — built with AI assistance, from backend to frontend.
+                                    <a href="https://github.com/ajithganesan/codocent-/blob/feature/image-integration/backend/reading_comprehension/materials/icl_from_books/M6/Informatieve%20teksten/02_een_bril.md?plain=1" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.65rem; color:#7c3aed; text-decoration:none; font-weight:500;">View ICL example on GitHub &rarr;</a>
                                 </div>
                             </div>
 
@@ -1808,11 +1850,6 @@
                                     Scores improved. A personal AI project that made a real difference.
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="callout">
-                            <div class="callout-big">From struggling to improving — powered by AI</div>
-                            <div class="callout-sub">Built a complete Dutch reading comprehension platform with AI — personalised stories, curriculum-aligned questions, and measurable results.</div>
                         </div>
 
                         <hr class="section-divider">
@@ -1998,6 +2035,8 @@
         document.addEventListener('keydown', e => {
             const tag = document.activeElement?.tagName;
             if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+            if (e.key === 'Escape') { closeLightbox(); return; }
+            if (lightboxOpen) return;
             if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
             if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
             if (e.key === 'f' || e.key === 'F') toggleFullscreen();
@@ -2007,6 +2046,7 @@
         let touchStartX = 0;
         document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
         document.addEventListener('touchend', e => {
+            if (lightboxOpen) return;
             const diff = touchStartX - e.changedTouches[0].screenX;
             if (Math.abs(diff) > 60) {
                 diff > 0 ? next() : prev();
@@ -2044,6 +2084,37 @@
             });
         }
 
+        // Lightbox
+        let lightboxOpen = false;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        document.querySelectorAll('.viyan-card img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                lightboxOpen = true;
+            });
+        });
+
+        function closeLightbox() {
+            if (!lightboxOpen) return;
+            lightbox.classList.remove('active');
+            lightboxOpen = false;
+        }
+
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+                closeLightbox();
+            }
+        });
+
     </script>
+
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
 </body>
 </html>

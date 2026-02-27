@@ -982,6 +982,134 @@
             font-size: 0.85rem;
         }
 
+        /* Stat Hero (Anthropic highlight) */
+        .stat-hero {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border: 2px solid rgba(124, 58, 237, 0.25);
+            border-radius: 1rem;
+            padding: 1.75rem 2rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-hero::after {
+            content: '90%';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(124, 58, 237, 0.06);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .stat-hero:hover {
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.15);
+        }
+
+        .stat-hero .stat-logo {
+            width: 64px;
+            height: 64px;
+            font-size: 1.6rem;
+        }
+
+        .stat-hero .stat-pct {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            min-width: 100px;
+        }
+
+        .stat-hero .stat-bar-wrap {
+            height: 10px;
+        }
+
+        .stat-hero .stat-bar {
+            background: linear-gradient(90deg, #6d28d9, #a855f7, #c084fc);
+        }
+
+        /* Stat Grid (2-col for remaining stat cards) */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .stat-grid .stat-card {
+            padding: 1rem;
+            margin-bottom: 0;
+        }
+
+        .stat-grid .stat-logo {
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+        }
+
+        .stat-grid .stat-pct {
+            font-size: 1.3rem;
+            min-width: 65px;
+        }
+
+        /* Money Grid (2-col) */
+        .money-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .money-grid .money-card {
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .money-grid .money-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(251, 191, 36, 0.08), rgba(251, 191, 36, 0.03));
+            z-index: -1;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 1rem 0 0 1rem;
+        }
+
+        .money-grid .money-card.bar-animated::before {
+            width: var(--proportion, 0%);
+        }
+
+        /* Meta target subtitle */
+        .stat-target {
+            font-size: 0.65rem;
+            color: #9ca3af;
+            margin-top: 0.15rem;
+        }
+
+        /* Tweet Grid (extracted from inline style) */
+        .tweet-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         /* Print Styles */
         @media print {
             body { overflow: visible; height: auto; background: white; }
@@ -1038,9 +1166,10 @@
                             <div class="byline">A personal perspective by Ajith Ganesan</div>
                             <div class="stat-ribbon">
                                 <div class="stat-pill"><strong>$680B+</strong> &nbsp;Mag 7 AI Capex</div>
-                                <div class="stat-pill"><strong>29M</strong> &nbsp;Claude Code daily installs</div>
+                                <div class="stat-pill"><strong>90%</strong> &nbsp;Anthropic code by AI</div>
                                 <div class="stat-pill"><strong>$285B</strong> &nbsp;wiped in one day</div>
-                                <div class="stat-pill"><strong>150GB</strong> &nbsp;gov data stolen via AI</div>
+                                <div class="stat-pill"><strong>29M</strong> &nbsp;Claude Code daily installs</div>
+                                <div class="stat-pill"><strong>$380B</strong> &nbsp;Anthropic valuation</div>
                             </div>
                         </div>
                     </div>
@@ -1070,25 +1199,25 @@
                                 <div class="video-embed short-embed">
                                     <iframe src="https://www.youtube.com/embed/tXTsiwu1_9E" loading="lazy" allowfullscreen></iframe>
                                 </div>
-                                <div class="video-label">Short Clip #2</div>
+                                <div class="video-label">Short Clip #1</div>
                             </div>
                             <div>
                                 <div class="video-embed short-embed">
                                     <iframe src="https://www.youtube.com/embed/LV-Uu7GvpUo" loading="lazy" allowfullscreen></iframe>
                                 </div>
-                                <div class="video-label">Short Clip #3</div>
+                                <div class="video-label">Short Clip #2</div>
                             </div>
                             <div>
                                 <div class="video-embed short-embed">
                                     <iframe src="https://www.youtube.com/embed/eaRGX9wVlU0" loading="lazy" allowfullscreen></iframe>
                                 </div>
-                                <div class="video-label">Short Clip #4</div>
+                                <div class="video-label">Short Clip #3</div>
                             </div>
                             <div>
                                 <div class="video-embed short-embed">
                                     <iframe src="https://www.youtube.com/embed/l-gaR8DYov8" loading="lazy" allowfullscreen></iframe>
                                 </div>
-                                <div class="video-label">Short Clip #5</div>
+                                <div class="video-label">Short Clip #4</div>
                             </div>
                         </div>
 
@@ -1223,7 +1352,7 @@
                         <div class="slide-title">The Code Is Eating Itself</div>
                         <div class="slide-subtitle">AI is now writing the code that builds AI. Here's where each major company stands.</div>
 
-                        <div class="stat-card">
+                        <div class="stat-hero">
                             <div class="stat-logo logo-anthropic">A</div>
                             <div class="stat-info">
                                 <div class="stat-company">Anthropic</div>
@@ -1234,59 +1363,62 @@
                             <div class="stat-pct">~90%</div>
                         </div>
 
-                        <div class="stat-card">
-                            <div class="stat-logo logo-amazon">a</div>
-                            <div class="stat-info">
-                                <div class="stat-company">Amazon</div>
-                                <div class="stat-detail">"Most code" now written by Amazon Q Developer. 79% of internal code reviews AI-assisted</div>
-                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="75"></div></div>
-                                <div class="stat-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, Feb 2025</a></div>
+                        <div class="stat-grid">
+                            <div class="stat-card">
+                                <div class="stat-logo logo-amazon">a</div>
+                                <div class="stat-info">
+                                    <div class="stat-company">Amazon</div>
+                                    <div class="stat-detail">"Most code" now written by Amazon Q Developer. 79% of internal code reviews AI-assisted</div>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" data-width="75"></div></div>
+                                    <div class="stat-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, Feb 2025</a></div>
+                                </div>
+                                <div class="stat-pct">~75%</div>
                             </div>
-                            <div class="stat-pct">~75%</div>
-                        </div>
 
-                        <div class="stat-card">
-                            <div class="stat-logo logo-github">GH</div>
-                            <div class="stat-info">
-                                <div class="stat-company">GitHub (across all users)</div>
-                                <div class="stat-detail">46% of all code on the platform is AI-generated via Copilot</div>
-                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="46"></div></div>
-                                <div class="stat-source"><a href="https://github.blog" target="_blank">GitHub Annual Report 2025</a></div>
+                            <div class="stat-card">
+                                <div class="stat-logo logo-github">GH</div>
+                                <div class="stat-info">
+                                    <div class="stat-company">GitHub (across all users)</div>
+                                    <div class="stat-detail">46% of all code on the platform is AI-generated via Copilot</div>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" data-width="46"></div></div>
+                                    <div class="stat-source"><a href="https://github.blog" target="_blank">GitHub Annual Report 2025</a></div>
+                                </div>
+                                <div class="stat-pct">46%</div>
                             </div>
-                            <div class="stat-pct">46%</div>
-                        </div>
 
-                        <div class="stat-card">
-                            <div class="stat-logo logo-google">G</div>
-                            <div class="stat-info">
-                                <div class="stat-company">Google / Alphabet</div>
-                                <div class="stat-detail">30%+ of new code AI-generated, reviewed and accepted by engineers</div>
-                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="32"></div></div>
-                                <div class="stat-source"><a href="https://abc.xyz/investor/" target="_blank">Sundar Pichai, Q3 2025 Earnings</a></div>
+                            <div class="stat-card">
+                                <div class="stat-logo logo-google">G</div>
+                                <div class="stat-info">
+                                    <div class="stat-company">Google / Alphabet</div>
+                                    <div class="stat-detail">30%+ of new code AI-generated, reviewed and accepted by engineers</div>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" data-width="32"></div></div>
+                                    <div class="stat-source"><a href="https://abc.xyz/investor/" target="_blank">Sundar Pichai, Q3 2025 Earnings</a></div>
+                                </div>
+                                <div class="stat-pct">30%+</div>
                             </div>
-                            <div class="stat-pct">30%+</div>
-                        </div>
 
-                        <div class="stat-card">
-                            <div class="stat-logo logo-ms">M</div>
-                            <div class="stat-info">
-                                <div class="stat-company">Microsoft</div>
-                                <div class="stat-detail">20-30% of repo code AI-generated. GitHub Copilot powers their internal workflow</div>
-                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="25"></div></div>
-                                <div class="stat-source"><a href="https://www.weforum.org" target="_blank">Satya Nadella, Davos 2026</a></div>
+                            <div class="stat-card">
+                                <div class="stat-logo logo-ms">MS</div>
+                                <div class="stat-info">
+                                    <div class="stat-company">Microsoft</div>
+                                    <div class="stat-detail">20-30% of repo code AI-generated. GitHub Copilot powers their internal workflow</div>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" data-width="25"></div></div>
+                                    <div class="stat-source"><a href="https://www.weforum.org" target="_blank">Satya Nadella, Davos 2026</a></div>
+                                </div>
+                                <div class="stat-pct">20-30%</div>
                             </div>
-                            <div class="stat-pct">20-30%</div>
-                        </div>
 
-                        <div class="stat-card">
-                            <div class="stat-logo logo-meta">M</div>
-                            <div class="stat-info">
-                                <div class="stat-company">Meta</div>
-                                <div class="stat-detail">"Half by mid-2026" — rapid AI code adoption accelerating</div>
-                                <div class="stat-bar-wrap"><div class="stat-bar" data-width="40"></div></div>
-                                <div class="stat-source"><a href="https://investor.fb.com" target="_blank">Mark Zuckerberg, Q4 2025</a></div>
+                            <div class="stat-card">
+                                <div class="stat-logo logo-meta">∞</div>
+                                <div class="stat-info">
+                                    <div class="stat-company">Meta</div>
+                                    <div class="stat-detail">"Half by mid-2026" — rapid AI code adoption accelerating</div>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" data-width="40"></div></div>
+                                    <div class="stat-target">target: 50% by mid-2026</div>
+                                    <div class="stat-source"><a href="https://investor.fb.com" target="_blank">Mark Zuckerberg, Q4 2025</a></div>
+                                </div>
+                                <div class="stat-pct">~40%</div>
                             </div>
-                            <div class="stat-pct">→ 50%</div>
                         </div>
 
                         <div class="callout">
@@ -1307,66 +1439,68 @@
                             <div class="context" style="margin-top:0.3rem; font-size:0.75rem;">For comparison: the Apollo program cost ~$170B in today's dollars. This is 4× that. Every year.</div>
                         </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$100B+</div>
-                            <div class="money-info">
-                                <div class="money-company">Amazon (AWS)</div>
-                                <div class="money-what">AWS AI infrastructure, custom Trainium chips, data centers</div>
-                                <div class="money-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, 2025 guidance</a></div>
+                        <div class="money-grid">
+                            <div class="money-card" style="--proportion: 100%;">
+                                <div class="money-amount">$100B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">Amazon (AWS)</div>
+                                    <div class="money-what">AWS AI infrastructure, custom Trainium chips, data centers</div>
+                                    <div class="money-source"><a href="https://aws.amazon.com" target="_blank">Andy Jassy, 2025 guidance</a></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$80B+</div>
-                            <div class="money-info">
-                                <div class="money-company">Microsoft</div>
-                                <div class="money-what">Azure AI, OpenAI partnership, Copilot ecosystem, data centers</div>
-                                <div class="money-source"><a href="https://www.microsoft.com/en-us/investor" target="_blank">FY2025 guidance</a></div>
+                            <div class="money-card" style="--proportion: 80%;">
+                                <div class="money-amount">$80B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">Microsoft</div>
+                                    <div class="money-what">Azure AI, OpenAI partnership, Copilot ecosystem, data centers</div>
+                                    <div class="money-source"><a href="https://www.microsoft.com/en-us/investor" target="_blank">FY2025 guidance</a></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$75B+</div>
-                            <div class="money-info">
-                                <div class="money-company">Google / Alphabet</div>
-                                <div class="money-what">TPU v6, Gemini models, DeepMind expansion, AI-first search</div>
-                                <div class="money-source"><a href="https://abc.xyz/investor/" target="_blank">2025 earnings guidance</a></div>
+                            <div class="money-card" style="--proportion: 75%;">
+                                <div class="money-amount">$75B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">Google / Alphabet</div>
+                                    <div class="money-what">TPU v6, Gemini models, DeepMind expansion, AI-first search</div>
+                                    <div class="money-source"><a href="https://abc.xyz/investor/" target="_blank">2025 earnings guidance</a></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$60-65B</div>
-                            <div class="money-info">
-                                <div class="money-company">Meta</div>
-                                <div class="money-what">Llama models, AI research campus, open-source AI leadership</div>
-                                <div class="money-source"><a href="https://investor.fb.com" target="_blank">Zuckerberg, Q4 2025</a></div>
+                            <div class="money-card" style="--proportion: 63%;">
+                                <div class="money-amount">$60-65B</div>
+                                <div class="money-info">
+                                    <div class="money-company">Meta</div>
+                                    <div class="money-what">Llama models, AI research campus, open-source AI leadership</div>
+                                    <div class="money-source"><a href="https://investor.fb.com" target="_blank">Zuckerberg, Q4 2025</a></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$20B+</div>
-                            <div class="money-info">
-                                <div class="money-company">Apple</div>
-                                <div class="money-what">On-device AI, Apple Intelligence, custom AI silicon</div>
-                                <div class="money-source">Estimated from capex filings</div>
+                            <div class="money-card" style="--proportion: 20%;">
+                                <div class="money-amount">$20B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">Apple</div>
+                                    <div class="money-what">On-device AI, Apple Intelligence, custom AI silicon</div>
+                                    <div class="money-source">Estimated from capex filings</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">Record</div>
-                            <div class="money-info">
-                                <div class="money-company">NVIDIA</div>
-                                <div class="money-what">Blackwell GPU production, AI factory partnerships, R&D at record levels</div>
-                                <div class="money-source"><a href="https://investor.nvidia.com" target="_blank">NVIDIA IR</a></div>
+                            <div class="money-card" style="--proportion: 12%;">
+                                <div class="money-amount">$12B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">NVIDIA</div>
+                                    <div class="money-what">R&D-focused: Blackwell GPU design, AI factory partnerships, chip architecture at record levels</div>
+                                    <div class="money-source"><a href="https://investor.nvidia.com" target="_blank">NVIDIA IR</a></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="money-card">
-                            <div class="money-amount">$10B+</div>
-                            <div class="money-info">
-                                <div class="money-company">Tesla</div>
-                                <div class="money-what">Dojo supercomputer, FSD training, Optimus robot AI</div>
-                                <div class="money-source"><a href="https://ir.tesla.com" target="_blank">Elon Musk, 2025</a></div>
+                            <div class="money-card" style="--proportion: 10%;">
+                                <div class="money-amount">$10B+</div>
+                                <div class="money-info">
+                                    <div class="money-company">Tesla</div>
+                                    <div class="money-what">Dojo supercomputer, FSD training, Optimus robot AI</div>
+                                    <div class="money-source"><a href="https://ir.tesla.com" target="_blank">Elon Musk, 2025</a></div>
+                                </div>
                             </div>
                         </div>
 
@@ -1466,6 +1600,14 @@
                                 <span class="tl-tag launch">Launch</span>
                             </div>
 
+                            <div class="tl-item major">
+                                <div class="tl-date">February 26, 2026</div>
+                                <div class="tl-title">📉 Block Lays Off 4,000+ — Dorsey Says "Most Companies Will Follow"</div>
+                                <div class="tl-desc">Jack Dorsey cuts ~half of Block's 10,000 workforce in AI-driven restructuring. Stock surges 20%. Dorsey predicts most companies will make similar cuts within a year.</div>
+                                <div class="tl-source"><a href="https://www.cnbc.com" target="_blank">CNBC</a> · <a href="https://techcrunch.com" target="_blank">TechCrunch</a></div>
+                                <span class="tl-tag market">Market Shift</span>
+                            </div>
+
                             <div class="tl-item">
                                 <div class="tl-date">February 26, 2026</div>
                                 <div class="tl-title">Claude Code: 29M Daily Installs</div>
@@ -1482,7 +1624,7 @@
                         <div class="slide-title">The Discourse</div>
                         <div class="slide-subtitle">What people are saying on X.</div>
 
-                        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto;">
+                        <div class="tweet-grid">
 
                             <div class="tweet-card">
                                 <div class="tweet-header">
@@ -1633,7 +1775,6 @@
                     <div class="sidebar-section"><h3>Part 6 · Personal</h3></div>
                     <button class="slide-btn" data-slide="6" onclick="goTo(6)">🛠️ My AI Workflow</button>
 
-                    <div class="sidebar-section"><h3></h3></div>
                     <button class="slide-btn" data-slide="7" onclick="goTo(7)">🏁 Closing</button>
                 </div>
             </div>
@@ -1694,6 +1835,9 @@
             // Animate stat bars if on slide 2
             if (n === 2) animateStatBars();
 
+            // Animate money proportion bars if on slide 3
+            if (n === 3) animateMoneyBars();
+
         }
 
         function next() { goTo(current + 1); }
@@ -1735,6 +1879,17 @@
                 setTimeout(() => {
                     bar.style.width = bar.dataset.width + '%';
                 }, 100);
+            });
+        }
+
+        let moneyBarsAnimated = false;
+        function animateMoneyBars() {
+            if (moneyBarsAnimated) return;
+            moneyBarsAnimated = true;
+            document.querySelectorAll('.money-grid .money-card').forEach((card, i) => {
+                setTimeout(() => {
+                    card.classList.add('bar-animated');
+                }, 100 + i * 120);
             });
         }
 
